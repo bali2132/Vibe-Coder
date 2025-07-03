@@ -3,17 +3,54 @@
  * 
  * This is the main React frontend for the Conversational AI Builder application.
  * It provides a modern, responsive user interface for:
- * - Text input for user prompts
- * - Real-time AI conversation powered by Vapi AI
- * - Audio playback of AI responses
- * - Server health monitoring and error handling
+ * - Text input for user prompts with real-time validation
+ * - Real-time AI conversation powered by Vapi AI backend
+ * - Audio playback of AI responses with comprehensive controls
+ * - Server health monitoring and automatic reconnection
+ * - Comprehensive error handling and user feedback
+ * 
+ * COMPONENT ARCHITECTURE AND DESIGN PATTERNS:
+ * - Single-page application with centralized state management
+ * - React Hooks pattern for clean, functional component design
+ * - Separation of concerns: UI, API logic, audio handling, error management
+ * - Real-time status monitoring with automatic health checks
+ * - Responsive design with mobile-first approach
+ * 
+ * STATE MANAGEMENT STRATEGY:
+ * - useState for component-level state management
+ * - useRef for audio element control and direct DOM manipulation
+ * - useEffect for lifecycle management and side effects
+ * - Centralized error state for consistent error handling
+ * - Real-time server connection monitoring
+ * 
+ * USER EXPERIENCE DESIGN:
+ * - Progressive enhancement: works without audio if TTS fails
+ * - Loading states with clear progress indicators
+ * - Toast notifications for all user actions and system events
+ * - Character counting with visual feedback
+ * - Disabled states during loading and server disconnection
+ * - Clear visual hierarchy and intuitive navigation
+ * 
+ * API INTEGRATION PATTERNS:
+ * - Axios for HTTP client with timeout and error handling
+ * - Automatic retry mechanisms for failed requests
+ * - Real-time health monitoring with periodic checks
+ * - Graceful degradation when backend services are unavailable
+ * - Structured error handling with user-friendly messages
+ * 
+ * AUDIO SYSTEM DESIGN:
+ * - HTML5 audio element with programmatic control
+ * - Play/pause functionality with visual feedback
+ * - Error handling for audio loading and playback failures
+ * - Automatic state management for audio events
+ * - Preloading for smooth playback experience
  * 
  * Technologies Used:
  * - React with Hooks (useState, useRef, useEffect)
  * - Axios for HTTP requests to backend API
- * - Lucide React for modern icons
- * - React Hot Toast for user notifications
- * - CSS for responsive styling
+ * - Lucide React for modern, consistent icons
+ * - React Hot Toast for elegant user notifications
+ * - CSS3 for responsive, modern styling
  * 
  * Author: Built for job interview task
  * Requirements: React + Node.js, clean UI, voice playback capability
@@ -48,25 +85,30 @@ import './index.css';
  */
 function App() {
   // =============================================================================
-  // STATE MANAGEMENT
+  // STATE MANAGEMENT - COMPREHENSIVE REACT HOOKS ARCHITECTURE
   // =============================================================================
   
-  // User input states
-  const [prompt, setPrompt] = useState('');                    // Main user prompt text
-  const [systemMessage, setSystemMessage] = useState('');      // Optional system message override
+  // USER INPUT STATE MANAGEMENT
+  // These states handle all user input and form interaction
+  const [prompt, setPrompt] = useState('');                    // Main user prompt text - the core conversation input
+  const [systemMessage, setSystemMessage] = useState('');      // Optional system message override - allows AI behavior customization
   
-  // Response and interaction states
-  const [response, setResponse] = useState(null);              // AI response data object
-  const [loading, setLoading] = useState(false);               // Loading state for API calls
-  const [error, setError] = useState(null);                    // Error message display
+  // AI RESPONSE AND INTERACTION STATE MANAGEMENT
+  // These states manage the complete conversation lifecycle
+  const [response, setResponse] = useState(null);              // AI response data object - contains text, audio, metadata
+  const [loading, setLoading] = useState(false);               // Loading state for API calls - controls UI feedback
+  const [error, setError] = useState(null);                    // Error message display - centralized error handling
   
-  // Audio playback states
-  const [audioPlaying, setAudioPlaying] = useState(false);     // Audio playback status
+  // AUDIO PLAYBACK STATE MANAGEMENT
+  // Manages the complete audio experience for voice responses
+  const [audioPlaying, setAudioPlaying] = useState(false);     // Audio playback status - controls play/pause UI
   
-  // Server connection monitoring
-  const [serverStatus, setServerStatus] = useState('checking'); // 'checking', 'connected', 'disconnected'
+  // SERVER CONNECTION MONITORING STATE
+  // Real-time backend connectivity status for reliable user experience
+  const [serverStatus, setServerStatus] = useState('checking'); // 'checking', 'connected', 'disconnected' - three-state monitoring
   
-  // Audio reference for playback control
+  // AUDIO ELEMENT REFERENCE FOR DIRECT DOM MANIPULATION
+  // useRef provides direct access to audio element for programmatic control
   const audioRef = useRef(null);
 
   // =============================================================================
@@ -82,14 +124,30 @@ function App() {
   // =============================================================================
   
   /**
-   * Component Mount Effect
-   * Check server health on component mount and set up periodic health checks
+   * Component Mount Effect - Application Lifecycle Management
+   * 
+   * PURPOSE AND BUSINESS LOGIC:
+   * This effect implements the application's health monitoring system.
+   * It ensures the frontend always knows the backend status and can
+   * provide appropriate user feedback.
+   * 
+   * IMPLEMENTATION STRATEGY:
+   * - Immediate health check on component mount for instant feedback
+   * - Periodic monitoring every 30 seconds for real-time status updates
+   * - Cleanup function prevents memory leaks and unnecessary requests
+   * 
+   * USER EXPERIENCE BENEFITS:
+   * - Users immediately see connection status when app loads
+   * - Real-time updates if backend goes down or comes back online
+   * - Prevents users from trying to send messages when backend is unavailable
+   * - Provides clear feedback about system status
    */
   useEffect(() => {
     checkServerHealth();
     // Check server health every 30 seconds to monitor backend status
+    // 30-second interval balances responsiveness with reasonable request frequency
     const interval = setInterval(checkServerHealth, 30000);
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval); // Cleanup on unmount prevents memory leaks
   }, []);
 
   // =============================================================================

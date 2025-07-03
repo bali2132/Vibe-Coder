@@ -1,33 +1,64 @@
-/* Reset and base styles */
+/**
+ * CONVERSATIONAL AI BUILDER - FRONTEND STYLING
+ * 
+ * DESIGN PHILOSOPHY AND APPROACH:
+ * This stylesheet implements a modern, professional design system for the
+ * Conversational AI Builder application. The design prioritizes:
+ * - Clean, minimalist interface that focuses on functionality
+ * - Responsive layout that works across all device sizes
+ * - Accessibility features for inclusive user experience
+ * - Modern visual hierarchy with consistent spacing and typography
+ * - Professional color scheme that conveys trust and reliability
+ * 
+ * VISUAL DESIGN STRATEGY:
+ * - Gradient backgrounds create modern, professional appearance
+ * - Card-based layout provides clear content separation
+ * - Consistent border radius creates cohesive visual language
+ * - Subtle shadows add depth without overwhelming content
+ * - Icon integration provides intuitive visual cues
+ * 
+ * RESPONSIVE DESIGN APPROACH:
+ * - Mobile-first design ensures optimal mobile experience
+ * - Flexible layouts adapt to different screen sizes
+ * - Touch-friendly interactive elements for mobile devices
+ * - Progressive enhancement from mobile to desktop
+ */
+
+/* GLOBAL RESET AND FOUNDATION STYLES */
+/* Implements modern CSS reset for consistent cross-browser behavior */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Ensures padding and borders are included in element width */
 }
 
+/* BODY AND TYPOGRAPHY FOUNDATION */
+/* Sets up the main visual theme and typography system */
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-  color: #333;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; /* Modern font stack with fallbacks */
+  -webkit-font-smoothing: antialiased; /* Improves font rendering on macOS */
+  -moz-osx-font-smoothing: grayscale; /* Improves font rendering on Firefox/macOS */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Professional gradient background */
+  min-height: 100vh; /* Ensures full viewport height coverage */
+  color: #333; /* Professional dark gray for optimal readability */
 }
 
-/* App container */
+/* MAIN APPLICATION CONTAINER */
+/* Implements the overall layout structure and spacing system */
 .app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  min-height: 100vh; /* Full viewport height for proper layout */
+  display: flex; /* Flexbox for vertical layout control */
+  flex-direction: column; /* Vertical stacking of header, main, footer */
+  align-items: center; /* Horizontal centering of content */
+  padding: 20px; /* Consistent spacing around the entire application */
 }
 
-/* Header styles */
+/* APPLICATION HEADER SECTION */
+/* Creates the branded header area with clear visual hierarchy */
 .header {
-  text-align: center;
-  margin-bottom: 40px;
-  color: white;
+  text-align: center; /* Centered text for professional appearance */
+  margin-bottom: 40px; /* Adequate spacing before main content */
+  color: white; /* High contrast against gradient background */
 }
 
 .header h1 {
@@ -54,28 +85,33 @@ body {
   margin-bottom: 20px;
 }
 
-/* Input section */
+/* USER INPUT SECTION STYLING */
+/* Implements the core interaction area where users compose their messages */
 .input-section {
-  margin-bottom: 30px;
+  margin-bottom: 30px; /* Adequate spacing before response area */
 }
 
+/* INPUT GROUP LAYOUT */
+/* Flexbox layout for input field and send button alignment */
 .input-group {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 15px;
+  display: flex; /* Horizontal layout for input and button */
+  gap: 15px; /* Consistent spacing between elements */
+  margin-bottom: 15px; /* Spacing before character counter */
 }
 
+/* MAIN PROMPT INPUT FIELD */
+/* Primary text input with modern styling and accessibility features */
 .prompt-input {
-  flex: 1;
-  padding: 15px 20px;
-  border: 2px solid #e1e5e9;
-  border-radius: 12px;
-  font-size: 16px;
-  font-family: inherit;
-  transition: all 0.3s ease;
-  outline: none;
-  resize: vertical;
-  min-height: 60px;
+  flex: 1; /* Takes remaining space in flex container */
+  padding: 15px 20px; /* Comfortable padding for text input */
+  border: 2px solid #e1e5e9; /* Subtle border with modern color */
+  border-radius: 12px; /* Rounded corners for modern appearance */
+  font-size: 16px; /* Optimal font size for mobile and desktop */
+  font-family: inherit; /* Consistent typography with application */
+  transition: all 0.3s ease; /* Smooth transitions for interactive states */
+  outline: none; /* Remove default browser outline */
+  resize: vertical; /* Allow vertical resizing for longer messages */
+  min-height: 60px; /* Minimum height for comfortable typing */
 }
 
 .prompt-input:focus {
@@ -162,29 +198,32 @@ body {
   font-size: 16px;
 }
 
-/* Audio controls */
+/* AUDIO PLAYBACK CONTROLS SECTION */
+/* Comprehensive audio interface for voice response playback */
 .audio-controls {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 15px;
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #e1e5e9;
+  display: flex; /* Horizontal layout for audio elements */
+  align-items: center; /* Vertical centering of all elements */
+  gap: 15px; /* Consistent spacing between audio controls */
+  padding: 15px; /* Comfortable padding around audio interface */
+  background: white; /* Clean white background for contrast */
+  border-radius: 8px; /* Rounded corners matching design system */
+  border: 1px solid #e1e5e9; /* Subtle border for definition */
 }
 
+/* AUDIO PLAY/PAUSE BUTTON */
+/* Central control button for audio playback with visual feedback */
 .play-button {
-  background: #667eea;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  background: #667eea; /* Brand color for primary action */
+  color: white; /* High contrast text/icon color */
+  border: none; /* Clean button appearance */
+  border-radius: 50%; /* Perfect circle for play button */
+  width: 50px; /* Fixed dimensions for consistent appearance */
+  height: 50px; /* Fixed dimensions for consistent appearance */
+  display: flex; /* Flexbox for icon centering */
+  align-items: center; /* Vertical centering of play/pause icon */
+  justify-content: center; /* Horizontal centering of play/pause icon */
+  cursor: pointer; /* Indicates interactive element */
+  transition: all 0.3s ease; /* Smooth transitions for hover effects */
 }
 
 .play-button:hover {

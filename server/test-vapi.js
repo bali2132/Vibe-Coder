@@ -1,9 +1,44 @@
+/**
+ * VAPI AI CONNECTIVITY TESTING UTILITY
+ * 
+ * PURPOSE AND BUSINESS LOGIC:
+ * This utility directly tests connectivity and functionality with the Vapi AI service.
+ * It validates API credentials, endpoint accessibility, and response formats
+ * to ensure seamless integration with the conversational AI platform.
+ * 
+ * TESTING STRATEGY:
+ * - Multiple endpoint testing to validate different Vapi AI capabilities
+ * - API key validation to ensure proper authentication
+ * - Response format verification for integration compatibility
+ * - Error handling testing to understand service limitations
+ * 
+ * INTEGRATION VALIDATION:
+ * Tests various Vapi AI endpoints to understand:
+ * - Which endpoints are available with current API key
+ * - Response formats for different types of requests
+ * - Rate limiting and error handling behavior
+ * - Service availability and reliability
+ */
+
 require('dotenv').config();
 const axios = require('axios');
 
+// Vapi AI service configuration with fallback API key for testing
 const VAPI_API_KEY = process.env.VAPI_API_KEY || '3a477c13-52f9-40ae-8fd0-6551f4b83502';
 const VAPI_BASE_URL = 'https://api.vapi.ai';
 
+/**
+ * Main Vapi AI Testing Function
+ * 
+ * COMPREHENSIVE TESTING APPROACH:
+ * Tests multiple Vapi AI endpoints to understand service capabilities:
+ * 1. Assistant endpoint - For creating and managing AI assistants
+ * 2. Chat completions - For direct text generation
+ * 3. Simple chat - For conversational interactions
+ * 
+ * Each test is isolated with individual error handling to identify
+ * which specific endpoints work with the current API configuration.
+ */
 async function testVapiAPI() {
   console.log('Testing Vapi API connectivity...');
   console.log('API Key:', VAPI_API_KEY ? `${VAPI_API_KEY.substring(0, 8)}...` : 'Not set');

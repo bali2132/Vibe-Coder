@@ -1,9 +1,51 @@
+/**
+ * VAPI AI CHAT FORMAT VALIDATION UTILITY
+ * 
+ * PURPOSE AND BUSINESS LOGIC:
+ * This utility specifically tests the correct format for Vapi AI chat interactions.
+ * It validates the exact request structure needed for successful conversations
+ * and helps debug integration issues with the chat API.
+ * 
+ * TESTING METHODOLOGY:
+ * - Creates a test assistant to establish proper conversation context
+ * - Tests the correct chat API format with assistantId and input fields
+ * - Validates response structure and content extraction
+ * - Provides fallback testing for alternative request formats
+ * 
+ * INTEGRATION DEBUGGING:
+ * This script helps identify:
+ * - Correct request format for Vapi AI chat API
+ * - Required fields and their expected values
+ * - Response structure for parsing AI responses
+ * - Error scenarios and their handling requirements
+ * 
+ * DEVELOPMENT WORKFLOW:
+ * Run this when integrating with Vapi AI to understand:
+ * - How to structure chat requests correctly
+ * - What response format to expect
+ * - How to handle different error conditions
+ * - Assistant creation and management workflow
+ */
+
 require('dotenv').config();
 const axios = require('axios');
 
+// Vapi AI configuration with production-ready API key
 const VAPI_API_KEY = process.env.VAPI_API_KEY || '44a43177-eed7-4ccf-a2f7-3d42a94507be';
 const VAPI_BASE_URL = 'https://api.vapi.ai';
 
+/**
+ * Correct Chat API Format Testing Function
+ * 
+ * TESTING WORKFLOW:
+ * 1. Creates a test assistant with proper configuration
+ * 2. Tests chat creation using the assistant ID
+ * 3. Validates response structure and data extraction
+ * 4. Tests alternative formats if primary method fails
+ * 
+ * This comprehensive approach ensures we understand exactly
+ * how to integrate with Vapi AI's chat system correctly.
+ */
 async function testCorrectChatAPI() {
   console.log('Testing correct Vapi Chat API format...');
   console.log('API Key:', VAPI_API_KEY ? `${VAPI_API_KEY.substring(0, 8)}...` : 'Not set');
