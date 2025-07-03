@@ -1,7 +1,7 @@
 {
   "name": "conversational-ai-builder-server",
   "version": "1.0.0",
-  "description": "Backend server for Conversational AI Builder",
+  "description": "Backend server for Conversational AI Builder - Handles Vapi AI integration, audio generation, and API endpoints",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
